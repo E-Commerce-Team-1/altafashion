@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      'serif': ['Playfair Display', 'serif']
+    },
     extend: {
       colors: {
         primary: "#171815",
