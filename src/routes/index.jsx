@@ -14,6 +14,7 @@ import CartDetail from "../pages/CartDetail";
 import DetailProduct from "../pages/DetailProduct";
 import Checkout from "../pages/Checkout";
 import OrderHistory from "../pages/OrderHistory";
+import NotFound from "pages/NotFound";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,10 @@ const Index = () => {
         <Route
           path="/history"
           element={isLoggedin ? <OrderHistory /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="*"
+          element={isLoggedin ? <NotFound /> : <Navigate to="/home" />}
         />
       </Routes>
     </BrowserRouter>
