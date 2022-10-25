@@ -14,7 +14,7 @@ import CartDetail from "../pages/CartDetail";
 import DetailProduct from "../pages/DetailProduct";
 import Checkout from "../pages/Checkout";
 import OrderHistory from "../pages/OrderHistory";
-import NotFound from "pages/NotFound";
+import NotFound from "../pages/NotFound";
 
 const Index = () => {
   const dispatch = useDispatch();
