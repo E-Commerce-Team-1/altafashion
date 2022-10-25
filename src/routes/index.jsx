@@ -68,7 +68,7 @@ const Index = () => {
         />
         <Route
           path="*"
-          element={isLoggedin ? <NotFound /> : <Navigate to="/home" />}
+          element={<NotFound />}
         />
       </Routes>
     </BrowserRouter>
