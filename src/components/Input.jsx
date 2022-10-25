@@ -1,9 +1,39 @@
-import React from 'react'
+import React from "react";
 
-const Input = () => {
+function InputText(props) {
   return (
-    <div>Input</div>
-  )
+    <input
+      type="text"
+      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      value={props.value}
+      onChange={props.onChange}
+      placeholder={props.placeholder}
+    />
+  );
 }
 
-export default Input
+function InputEmail(props) {
+  return (
+    <input
+      type="text"
+      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      value={props.value}
+      onChange={props.onChange}
+      placeholder={props.placeholder}
+    />
+  );
+}
+
+function InputPassword(props) {
+  return (
+    <input
+      type="password"
+      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      value={props.value}
+      onChange={props.onChange}
+      placeholder={props.placeholder}
+    />
+  );
+}
+
+export { InputText, InputEmail, InputPassword };
