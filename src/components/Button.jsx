@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const Button = () => {
+const ButtonPrimary = (props) => {
   return (
-    <div>Button</div>
-  )
-}
+    <div
+      className="bg-primary text-base text-center text-white m-auto p-4 w-full h-14 max-w-md cursor-pointer"
+      onClick={props.onClick}
+    >
+      {props.label}
+    </div>
+  );
+};
 
-export default Button
+export default ButtonPrimary;
