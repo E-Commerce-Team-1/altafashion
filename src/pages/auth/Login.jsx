@@ -45,8 +45,9 @@ function Login() {
         <title>Login | altafashion</title>
         <meta name="description" content="App Description" />
       </Helmet>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 m-2">
-        <div className="flex justify-center place-items-center w-full h-screen bg-slate-100">
+        <div className="hidden md:flex lg:flex justify-center place-items-center w-full h-screen bg-slate-100">
           <img
             src="src\assets\Login & Register.png"
             alt="Logo"
@@ -55,14 +56,14 @@ function Login() {
         </div>
         <div className="flex flex-wrap justify-center place-items-center w-full h-screen">
           <div>
-            <h1 className="font-serif font-semibold text-primary text-4xl my-5">
+            <h1 className="font-serif font-semibold text-primary text-5xl my-9">
               Sign In Account
             </h1>
-            <p className="font-bold text-primary text-lg lg:text-xl my-5">
+            <p className="font-medium text-primary text-lg lg:text-xl my-5">
               Enter your email address to continue.
             </p>
             <div>
-              <label className="text-lg text-primary">Your Email</label>
+              <label className="text-lg text-secondary">Your Email</label>
               <InputEmail
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -71,20 +72,20 @@ function Login() {
             </div>
             <br />
             <div>
-              <label className="text-lg text-primary">Password</label>
+              <label className="text-lg text-secondary">Password</label>
               <InputPassword
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
             </div>
-            <p className="flex justify-end text-base my-5">
+            <p className="flex justify-end text-base my-6">
               <a className="cursor-pointer">Reset Password</a>
             </p>
             <ButtonPrimary label="Sign In" onClick={handleSubmit} />
-            <p className="text-base text-center text-gray-400 my-5">
+            <p className="text-base text-center text-gray-400 my-9">
               Don't have an account?
-              <a className="text-primary cursor-pointer">
+              <a className="text-primary text-base cursor-pointer">
                 <Link to="/register"> Register Here</Link>
               </a>
             </p>

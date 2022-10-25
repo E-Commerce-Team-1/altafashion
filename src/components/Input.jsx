@@ -4,7 +4,7 @@ function InputText(props) {
   return (
     <input
       type="text"
-      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      className="border border-line text-base mx-auto mt-2 p-4 w-full h-14 max-w-md"
       value={props.value}
       onChange={props.onChange}
       placeholder={props.placeholder}
@@ -16,7 +16,7 @@ function InputEmail(props) {
   return (
     <input
       type="text"
-      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      className="border border-line text-base mx-auto mt-2 p-4 w-full h-14 max-w-md"
       value={props.value}
       onChange={props.onChange}
       placeholder={props.placeholder}
@@ -28,7 +28,7 @@ function InputPassword(props) {
   return (
     <input
       type="password"
-      className="border border-line text-base m-auto p-4 w-full h-14 max-w-md"
+      className="border border-line text-base mx-auto mt-2 p-4 w-full h-14 max-w-md"
       value={props.value}
       onChange={props.onChange}
       placeholder={props.placeholder}
