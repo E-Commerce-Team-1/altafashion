@@ -66,10 +66,7 @@ const Index = () => {
           path="/history"
           element={isLoggedin ? <OrderHistory /> : <Navigate to="/login" />}
         />
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
