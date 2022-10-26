@@ -102,7 +102,7 @@ const Checkout = () => {
           </div>
           <Button
             className="bg-primary mt-4 h-14 w-[500px] flex items-center justify-center font-normal text-lg text-white cursor-pointer"
-            label="Finish Order"
+            label="Checkout Order"
           />
         </section>
       </div>
