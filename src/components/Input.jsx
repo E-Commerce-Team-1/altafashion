@@ -12,6 +12,18 @@ function InputText(props) {
   );
 }
 
+function InputCustom(props) {
+  return (
+    <input
+      type={props.type}
+      className={props.className}
+      value={props.value}
+      onChange={props.onChange}
+      placeholder={props.placeholder}
+    />
+  );
+}
+
 function InputEmail(props) {
   return (
     <input
@@ -36,4 +48,4 @@ function InputPassword(props) {
   );
 }
 
-export { InputText, InputEmail, InputPassword };
+export { InputText, InputEmail, InputPassword, InputCustom };
