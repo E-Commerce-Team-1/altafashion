@@ -1,12 +1,14 @@
 import React from "react";
 import "../styles/index.css";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 function Layout({ children }) {
   return (
     <div>
-      {/* Navbar */}
+      <Navbar />
       <div className="w-full h-full">{children}</div>
-      {/* footer */}
+      <Footer />
     </div>
   );
 }
