@@ -44,7 +44,9 @@ function CardCart(props) {
             </div>
           </div>
           <div className="ml-6 mt-2 text-right">
-            <h4 className="text-primary font-medium">Rp 599.000</h4>
+            <h4 className="text-primary font-medium">
+              Rp {props.price * counter}
+            </h4>
             <button
               className="text-secondary mt-28"
               onClick={props.removeProduct}

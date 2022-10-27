@@ -9,8 +9,8 @@ import {
 } from "react-icons/ri";
 
 function Navbar() {
-  function clearLocalStorage() {
-    localStorage.clear();
+  function handleLogout() {
+    localStorage.removeItem("token");
     window.location.reload();
   }
 
@@ -46,7 +46,7 @@ function Navbar() {
                 </li>
                 <hr />
                 <li>
-                  <a onClick={clearLocalStorage}>Logout</a>
+                  <a onClick={handleLogout}>Logout</a>
                 </li>
               </ul>
             </li>
@@ -84,7 +84,7 @@ function Navbar() {
               </li>
               <hr />
               <li>
-                <a onClick={clearLocalStorage}>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </li>
