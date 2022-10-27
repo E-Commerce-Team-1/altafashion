@@ -1,68 +1,104 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+  RiAccountCircleLine,
+  RiShoppingCart2Line,
+  RiArrowDropRightLine,
+  RiBarChartHorizontalLine,
+  RiArrowDropDownFill,
+} from "react-icons/ri";
 
-const Navbar = () => {
+function Navbar() {
+  function clearLocalStorage() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
-    <div className="navbar border-b py-4 px-10 bg-white">
-      <div className="flex-1">
-        <a className="btn btn-ghost normal-case font-serif text-2xl">
-          ALTAFASHION
+    <div className="navbar border border-b border-x-0 border-gray-300 bg-white px-10">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="lg:hidden ">
+            <RiBarChartHorizontalLine className="w-6 h-6" />
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-compact dropdown-content mt-3 p-2 bg-white border border-primary w-52"
+          >
+            <li>
+              <a>Placeholder SearchBar</a>
+            </li>
+            <li tabIndex={0}>
+              <a className="justify-between">
+                <RiAccountCircleLine className="w-6 h-6" />
+                <RiArrowDropRightLine className="w-6 h-6" />
+              </a>
+              <ul className="menu p-2 bg-white border border-black">
+                <li>
+                  <a>
+                    <Link to="/myprofile">My Profile</Link>
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <Link to="/myproduct">My Product</Link>
+                  </a>
+                </li>
+                <hr />
+                <li>
+                  <a onClick={clearLocalStorage}>Logout</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a>
+                <Link to="/cart">
+                  <RiShoppingCart2Line className="w-6 h-6" />{" "}
+                </Link>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a className="normal-case font-serif font-semibold text-2xl">
+          {" "}
+          <Link to="/home">ALTAFASHION</Link>
         </a>
       </div>
-      <div className="flex-none">
+      <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
-          {/* <li>searchbar</li> */}
           <li tabIndex={0}>
             <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
+              <RiAccountCircleLine className="w-6 h-6" />
+              <RiArrowDropDownFill className="w-6 h-6" />
             </a>
-            <ul className="p-2 bg-white border border-black">
+            <ul className="rounded-none border menu menu-compact dropdown-content bg-base-100 border-black">
               <li>
-                <a>My Profile</a>
+                <a>
+                  <Link to="/myprofile">My Profile</Link>
+                </a>
               </li>
               <li>
-                <a>My Product</a>
+                <a>
+                  <Link to="/myproduct">My Product</Link>
+                </a>
               </li>
               <hr />
               <li>
-                <a>Logout</a>
+                <a onClick={clearLocalStorage}>Logout</a>
               </li>
             </ul>
           </li>
           <li>
             <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                />
-              </svg>
+              <Link to="/cart">
+                <RiShoppingCart2Line className="w-6 h-6" />
+              </Link>
             </a>
           </li>
         </ul>
       </div>
     </div>
   );
-};
+}
 
 export default Navbar;
