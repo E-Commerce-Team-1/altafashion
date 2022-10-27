@@ -5,8 +5,8 @@ import axios from "axios";
 
 import Layout from "../components/Layout";
 import Button from "../components/Button";
-import ModalAddProduct from "../components/ModalProduct";
-import ModalEditProduct from "../components/ModalEdit";
+import { ModalAddProduct, ModalEditProduct } from "../components/ModalProduct";
+
 import { apiRequest } from "../utils/apiRequest";
 //import Image2 from "../assets/img-product2.png";
 
@@ -84,7 +84,7 @@ const MyProduct = (props) => {
                     </p>
                   </div>
                   <div>
-                    <ModalEditProduct title="Edit Product" />
+                    <ModalEditProduct />
                     <Button
                       onClick={() => handleDelMyProduct(detail?.id)}
                       className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
