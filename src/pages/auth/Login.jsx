@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
 
 import { Helmet } from "react-helmet";
 import { InputEmail, InputPassword } from "../../components/Input";
@@ -10,41 +11,65 @@ import { handleAuth } from "../../utils/redux/reducers/reducer";
 import LoginRegister from "../../assets/LoginRegister.png";
 
 function Login() {
+  const [cookies, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   if (email && password) {
-  //     setDisabled(false);
-  //   } else {
-  //     setDisabled(true);
-  //   }
-  // }, [email, password]);
+  useEffect(() => {
+    if (email && password) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [email, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
+    const body = {
+      email,
+      password,
+    };
     axios
-      .post(`https://immersiveapp.site/login`, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        localStorage.setItem("token", response.data.data.token);
+      .post("login", body)
+      .then((res) => {
+        const { data, message } = res.data;
+        setCookie("token", data.token, { path: "/" });
         dispatch(handleAuth(true));
         alert("You're logged in");
         navigate("/home");
       })
-      .catch((error) => {
-        if (error.response?.status === 400) {
-          alert("An invalid client request.");
-        } else if (error.response?.status === 500) {
-          alert("There is problem on server.");
-        }
-      });
+      .catch((err) => {
+        const { data } = err.response;
+        alert("Error");
+      })
+      .finally(() => setLoading(false));
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(`https://immersiveapp.site/login`, {
+  //       email: email,
+  //       password: password,
+  //     })
+  //     .then((response) => {
+  //       setCookie("token", data.token, { path: "/" });
+  //       dispatch(handleAuth(true));
+  //       alert("You're logged in");
+  //       navigate("/home");
+  //     })
+  //     .catch((error) => {
+  //       if (error.response?.status === 400) {
+  //         alert("An invalid client request.");
+  //       } else if (error.response?.status === 500) {
+  //         alert("There is problem on server.");
+  //       }
+  //     });
+  // };
 
   return (
     <>

@@ -1,24 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { WithRouter } from "../utils/Navigation";
+import axios from "axios";
 
 import Layout from "../components/Layout";
 import Background from "../assets/background.svg";
 import Profile from "../assets/profile.png";
 import { InputText, InputEmail, InputPassword } from "../components/Input";
+import { apiRequest } from "../utils/apiRequest";
 
 const MyProfile = () => {
+  const [datas, setDatas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [objSubmit, setObjSubmit] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    axios
+      .get(`https://immersiveapp.site/users`)
+      .then((res) => {
+        const { data } = res.data;
+        setDatas(data);
+        console.log(datas);
+      })
+      .catch((err) => {
+        alert(err.toString());
+      });
+  }
+
+  const handleEditProfile = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    for (const key in objSubmit) {
+      formData.append(key, objSubmit[key]);
+    }
+    apiRequest("users", "put", objSubmit, "multipart/form-data")
+      .then((res) => {
+        alert("Update Successfuly");
+        setObjSubmit({});
+      })
+      .catch((err) => {
+        alert(err);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const handleChange = (value, key) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
+  };
+
   return (
     <Layout>
       <div>
         <img className="w-screen" src={Background} alt="Background" />
         <div className="flex mx-20">
           <div className="w-44 h-44 -mt-14 rounded-full">
-            <img src={Profile} alt="Profile" />
+            {/* <img src={Profile} alt="Profile" /> */}
+            <img src={datas?.profile} alt="Profile" />
           </div>
           <div className="mt-4 ml-6">
-            <h5 className="font-bold text-xl text-primary">John Doe</h5>
+            <h5 className="font-bold text-xl text-primary">
+              {datas?.fullname}
+            </h5>
             <p className="font-normal text-sm mt-1.5 text-secondary">
-              johndoe@mail.id
+              {datas?.email}
             </p>
           </div>
         </div>
@@ -29,11 +78,21 @@ const MyProfile = () => {
         <h2 className="font-medium text-xl text-primary">Edit Profile</h2>
         <div className="mt-6">
           <div>
+            <label className="text-lg text-secondary">Profile Photo</label>
+          </div>
+          <InputText
+            value={objSubmit.profile}
+            onChange={(e) => handleChange(e.target.value, "profile")}
+            placeholder="Upload your photo"
+          />
+        </div>
+        <div className="mt-6">
+          <div>
             <label className="text-lg text-secondary">Full Name</label>
           </div>
           <InputText
-            // value={fullname}
-            // onChange={(e) => setFullName(e.target.value)}
+            value={objSubmit.fullname}
+            onChange={(e) => handleChange(e.target.value, "fullname")}
             placeholder="Edit your name"
           />
         </div>
@@ -42,8 +101,8 @@ const MyProfile = () => {
             <label className="text-lg text-secondary">Your Email</label>
           </div>
           <InputEmail
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            value={objSubmit.email}
+            onChange={(e) => handleChange(e.target.value, "email")}
             placeholder="Edit your email"
           />
         </div>
@@ -52,14 +111,14 @@ const MyProfile = () => {
             <label className="text-lg text-secondary">Password</label>
           </div>
           <InputPassword
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
+            value={objSubmit.password}
+            onChange={(e) => handleChange(e.target.value, "password")}
             placeholder="Enter new password"
           />
         </div>
         <div className="mt-10 mb-32 sm:flex sm:justify-between flex-col sm:flex-row">
           <button
-            // onClick={() => handleUpdateProfile()}
+            onClick={() => handleEditProfile()}
             className="bg-primary text-white h-12 w-52 text-base font-medium"
           >
             Save Changes
