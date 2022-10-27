@@ -1,10 +1,10 @@
 import React from "react";
 import { WithRouter } from "../utils/Navigation";
 import { Helmet } from "react-helmet";
-import { IoIosAdd } from "react-icons/io";
 
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import { ModalAddProduct, ModalEditProduct } from "../components/ModalProduct";
 import Image from "../assets/img-product.png";
 import Image2 from "../assets/img-product2.png";
 
@@ -24,13 +24,8 @@ const MyProduct = () => {
           </h1>
         </header>
 
-        {/* Button Add Product */}
-        <div className="mx-14 mb-10">
-          <button className="text-center bg-primary px-4 py-3 font-normal text-white text-base flex">
-            <IoIosAdd className="text-2xl" />
-            Add Product
-          </button>
-        </div>
+        {/* Modal Add Product */}
+        <ModalAddProduct />
 
         {/* Card Product */}
         <section className="w-ful flex mx-3 md:mx-16 lg:mx-20 xl:mx-14">
@@ -49,10 +44,7 @@ const MyProduct = () => {
                 </p>
               </div>
               <div>
-                <Button
-                  className="bg-primary h-11 w-72 flex items-center justify-center font-normal text-base text-white cursor-pointer"
-                  label="Edit Product"
-                />
+                <ModalEditProduct />
                 <Button
                   className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
                   label="Delete Product"
@@ -73,10 +65,7 @@ const MyProduct = () => {
                 </p>
               </div>
               <div>
-                <Button
-                  className="bg-primary h-11 w-72 flex items-center justify-center font-normal text-base text-white cursor-pointer"
-                  label="Edit Product"
-                />
+                <ModalEditProduct />
                 <Button
                   className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
                   label="Delete Product"
