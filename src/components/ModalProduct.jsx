@@ -19,8 +19,8 @@ function ModalAddProduct() {
 
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal rounded-none modal-bottom sm:modal-middle">
-        <div className="bg-white w-[600px] border p-6">
+      <div className="modal rounded-none modal-bottom py-5 sm:modal-middle">
+        <div className="bg-white w-[600px] h-full overflow-auto border p-6">
           <h3 className="font-bold text-lg text-center">Add New Product</h3>
           <hr className="text-line mt-6" />
           <div className="flex justify-center mt-6 mb-9">
@@ -126,8 +126,8 @@ function ModalEditProduct() {
 
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal rounded-none modal-bottom sm:modal-middle">
-        <div className="bg-white w-[600px] border p-6">
+      <div className="modal rounded-none  modal-bottom py-5 sm:modal-middle">
+        <div className="bg-white w-[600px] h-full overflow-auto border p-6">
           <h3 className="font-bold text-lg text-center">Edit Product</h3>
           <hr className="text-line mt-6" />
           <div className="flex justify-center mt-6 mb-9">
