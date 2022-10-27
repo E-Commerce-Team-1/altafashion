@@ -1,12 +1,34 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { WithRouter } from "../utils/Navigation";
 
 import Layout from "../components/Layout";
+import { setCarts } from "../utils/redux/reducers/reducer";
 import Product from "../assets/product_image.png";
 import Product2 from "../assets/product_image-2.png";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import CardCart from "../components/CardCart";
 
 const CartDetail = () => {
+  const carts = useSelector((state) => state.data.carts);
+  //const dispatch = useDispatch();
+
+  // function handleRemove(product) {
+  //   let filtered = carts.filter(({ id }) => {
+  //     return id !== product.id;
+  //   });
+  //   filtered.join(" - ");
+  //   const newList = JSON.stringify(filtered);
+  //   confirm("Are you going to remove from cart?").then((result) => {
+  //     if (true) {
+  //       localStorage.setItem("addCart", newList);
+  //       dispatch(setCarts(filtered));
+  //       localStorage.removeItem(filtered);
+  //       alert("It's gone");
+  //     }
+  //   });
+  // }
+
   return (
     <Layout>
       {/* Header */}
@@ -17,37 +39,17 @@ const CartDetail = () => {
       </header>
 
       {/* Cart Content */}
-      <section className="mx-20">
-        <hr className="text-line" />
-        <div className="flex my-5">
-          <div>
-            <img className="h-44 w-[200px]" src={Product} alt="Image Product" />
-          </div>
-          <div className="flex justify-between w-full">
-            <div className="ml-6 mt-2">
-              <h5 className="font-semibold text-xl text-primary">Gray Shirt</h5>
-              <p className="font-medium text-lg text-secondary mt-2">
-                Rp 399.000
-              </p>
-              <div className="flex mt-16">
-                <button>
-                  <AiFillMinusCircle className="mr-3.5 rounded-full bg-primary text-3xl text-white mt-1" />
-                </button>
-                <p className="text-lg font-medium w-auto text-center mt-1.5">
-                  2
-                </p>
-                <button>
-                  <AiFillPlusCircle className="text-primary text-3xl mt-1 ml-3.5" />
-                </button>
-              </div>
-            </div>
-            <div className="ml-6 mt-2 text-right">
-              <h4 className="text-primary font-medium">Rp 798.000</h4>
-              <button className="text-secondary mt-28">Remove</button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {carts.map((data) => (
+        <CardCart
+          key={data.id}
+          image={data.image}
+          name={data.name}
+          price={data.price}
+          removeProduct={() => handleRemove(data)}
+          sub={-1}
+          add={1}
+        />
+      ))}
       <section className="mx-20">
         <hr className="text-line" />
         <div className="flex my-5">

@@ -6,7 +6,8 @@ import { store } from "./utils/redux/store/store";
 import Index from "../src/routes/index";
 import "../src/styles/index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <Provider store={store}>
     <Index />
   </Provider>

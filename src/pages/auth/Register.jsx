@@ -16,7 +16,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://13.229.180.78:8000/register`, {
+      .post(`https://immersiveapp.site/register`, {
         fullName: fullName,
         email: email,
         password: password,
