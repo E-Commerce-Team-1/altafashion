@@ -10,7 +10,7 @@ import ButtonPrimary from "../components/Button";
 import hero from "../assets/hero.png";
 import { setCarts } from "../utils/redux/reducers/reducer";
 
-function HomePage() {
+function HomePage(props) {
   const dispatch = useDispatch();
   const [datas, setDatas] = useState([]);
 
