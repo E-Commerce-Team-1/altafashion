@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { WithRouter } from "../utils/Navigation";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import { Helmet } from "react-helmet";
 import Layout from "../components/Layout";
 
 import ButtonPrimary from "../components/Button";
+import { setCarts } from "../utils/redux/reducers/reducer";
 
 function DetailProduct() {
+  const dispatch = useDispatch();
   const [datas, setDatas] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function fetchData() {
     axios
-      .get(
-        `https://virtserver.swaggerhub.com/KLUKMANUL33_1/altafashionnewAPI/1.0.0/products/1`
-      )
+      .get(`https://immersiveapp.site/products/2`)
       .then((res) => {
         const { data } = res.data;
         const temp = [datas];
@@ -27,9 +32,21 @@ function DetailProduct() {
       });
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  function handleCart(product) {
+    const getProduct = localStorage.getItem("addCart");
+    if (getProduct) {
+      const parsedProducts = JSON.parse(getProduct);
+      parsedProducts.push(product);
+      const temp = JSON.stringify(parsedProducts);
+      dispatch(setCarts(parsedProducts));
+      localStorage.setItem("addCart", temp);
+    } else {
+      const temp = JSON.stringify([product]);
+      dispatch(setCarts([product]));
+      localStorage.setItem("addCart", temp);
+    }
+    alert("added to cart");
+  }
 
   return (
     <>
@@ -45,8 +62,8 @@ function DetailProduct() {
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="flex justify-center ">
                 <img
-                  src="https://images.journeys.ca/images/products/1_212394_ZM_B-LIFESTYLE1.JPG"
-                  alt="prototype"
+                  src={detail?.image}
+                  alt={detail?.name}
                   className="max-w-lg mt-20 mb-60 mr-20 ml-20"
                 />
               </div>
@@ -67,6 +84,7 @@ function DetailProduct() {
                 <ButtonPrimary
                   className="bg-primary font-medium text-lg text-center text-white my-16 mb-64 p-4 w-full h-14 max-w-md cursor-pointer"
                   label="Add to Cart"
+                  onClick={() => handleCart(detail)}
                 />
               </div>
             </div>
