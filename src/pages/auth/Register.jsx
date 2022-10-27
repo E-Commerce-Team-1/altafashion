@@ -6,42 +6,68 @@ import { Helmet } from "react-helmet";
 import { InputText, InputEmail, InputPassword } from "../../components/Input";
 import ButtonPrimary from "../../components/Button";
 import LoginRegister from "../../assets/LoginRegister.png";
+import { apiRequest } from "../../utils/apiRequest";
 
 function Register() {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
+  const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (email && password) {
+    if (fullname && email && password) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [email, password]);
+  }, [fullname, email, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    axios
-      .post(`https://immersiveapp.site/register`, {
-        fullName: fullName,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        const { message, data } = response.data;
+    const body = {
+      fullname: fullname,
+      email,
+      password,
+    };
+    apiRequest("register", "post", body)
+      .then((res) => {
+        const { message, data } = res;
         if (data) {
           navigate("/login");
         }
         alert(message);
       })
-      .catch((error) => {
-        const { message } = error.response.data;
+      .catch((err) => {
+        const { message } = err.response.data;
         alert(message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const body = {
+  //     fullname: fullname,
+  //     email,
+  //     password,
+  //   };
+  //   apiRequest("users", "post", body)
+  //     .then((response) => {
+  //       const { message, data } = response.data;
+  //       if (data) {
+  //         navigate("/login");
+  //       }
+  //       alert(message);
+  //     })
+  //     .catch((error) => {
+  //       const { message } = error.response.data;
+  //       alert(message);
+  //     });
+  // };
 
   return (
     <>
@@ -65,7 +91,7 @@ function Register() {
             <div>
               <label className="text-lg text-secondary">Full Name</label>
               <InputText
-                value={fullName}
+                value={fullname}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Full Name"
               />
@@ -92,7 +118,7 @@ function Register() {
             <ButtonPrimary
               className="bg-primary font-medium text-base text-center text-white m-auto p-4 w-full h-14 max-w-md cursor-pointer"
               label="Register Account"
-              onClick={handleSubmit}
+              onClick={(e) => handleSubmit(e)}
             />
             <p className="text-base text-center text-gray-400 my-9">
               Already have an account?
