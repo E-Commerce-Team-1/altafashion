@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoggedin: false,
+  carts: [],
 };
 
 const sliceState = createSlice({
@@ -11,6 +12,9 @@ const sliceState = createSlice({
     handleAuth: (state, action) => {
       state.isLoggedin = action.payload;
     },
+    setCarts: (state, action) => {
+      state.carts = action.payload;
+    },
   },
 });
 
@@ -18,5 +22,5 @@ const reducer = {
   state: sliceState.reducer,
 };
 
-export const { handleAuth } = sliceState.actions;
+export const { handleAuth, setCarts } = sliceState.actions;
 export default reducer;

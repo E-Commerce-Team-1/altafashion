@@ -8,9 +8,10 @@ import Layout from "../components/Layout";
 import CardProduct from "../components/CardProduct";
 import ButtonPrimary from "../components/Button";
 import hero from "../assets/hero.png";
+import { setCarts } from "../utils/redux/reducers/reducer";
 
 function HomePage() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [datas, setDatas] = useState([]);
 
   useEffect(() => {
@@ -19,9 +20,7 @@ function HomePage() {
 
   function fetchData() {
     axios
-      .get(
-        `https://virtserver.swaggerhub.com/KLUKMANUL33_1/altafashionnewAPI/1.0.0/products`
-      )
+      .get(`https://immersiveapp.site/products`)
       .then((res) => {
         const { data } = res.data;
         const temp = [...datas];
@@ -34,7 +33,21 @@ function HomePage() {
       });
   }
 
-  function addToCart(product) {}
+  function handleCart(product) {
+    const getProduct = localStorage.getItem("addCart");
+    if (getProduct) {
+      const parsedProducts = JSON.parse(getProduct);
+      parsedProducts.push(product);
+      const temp = JSON.stringify(parsedProducts);
+      dispatch(setCarts(parsedProducts));
+      localStorage.setItem("addCart", temp);
+    } else {
+      const temp = JSON.stringify([product]);
+      dispatch(setCarts([product]));
+      localStorage.setItem("addCart", temp);
+    }
+    alert("added to cart");
+  }
 
   return (
     <>
@@ -109,6 +122,7 @@ function HomePage() {
                 name={detail.name}
                 price={detail.price}
                 onNavigate={() => props.navigate(`/detail/${detail.id}`)}
+                addToCart={() => handleCart(detail)}
               />
             ))}
           </>
