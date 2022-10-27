@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useNavigate, Link } from "react-router-dom";
 import {
   RiAccountCircleLine,
   RiShoppingCart2Line,
@@ -9,10 +10,13 @@ import {
 } from "react-icons/ri";
 
 function Navbar() {
-  function handleLogout() {
-    localStorage.removeItem("token");
-    window.location.reload();
-  }
+  const [token, removeCookie] = useCookies();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    removeCookie("token");
+    navigate("/");
+  };
 
   return (
     <div className="navbar border border-b border-x-0 border-gray-300 bg-white px-10">
@@ -46,7 +50,7 @@ function Navbar() {
                 </li>
                 <hr />
                 <li>
-                  <a onClick={handleLogout}>Logout</a>
+                  <a onClick={() => handleLogout()}>Logout</a>
                 </li>
               </ul>
             </li>
@@ -84,7 +88,7 @@ function Navbar() {
               </li>
               <hr />
               <li>
-                <a onClick={handleLogout}>Logout</a>
+                <a onClick={() => handleLogout()}>Logout</a>
               </li>
             </ul>
           </li>
