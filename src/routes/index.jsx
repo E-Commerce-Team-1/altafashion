@@ -16,7 +16,7 @@ import Checkout from "../pages/Checkout";
 import OrderHistory from "../pages/OrderHistory";
 import NotFound from "../pages/NotFound";
 
-const Index = () => {
+function Index() {
   const dispatch = useDispatch();
   const isLoggedin = useSelector((state) => state.data.isLoggedin);
 
@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route
           path="/login"
           element={isLoggedin ? <Navigate to="/home" /> : <Login />}
@@ -70,6 +70,6 @@ const Index = () => {
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default Index;

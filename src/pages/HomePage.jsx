@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { WithRouter } from "../utils/Navigation";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import { Helmet } from "react-helmet";
 import Layout from "../components/Layout";
@@ -8,15 +10,42 @@ import ButtonPrimary from "../components/Button";
 import hero from "../assets/hero.png";
 
 function HomePage() {
+  //const dispatch = useDispatch();
+  const [datas, setDatas] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    axios
+      .get(
+        `https://virtserver.swaggerhub.com/KLUKMANUL33_1/altafashionnewAPI/1.0.0/products`
+      )
+      .then((res) => {
+        const { data } = res.data;
+        const temp = [...datas];
+        temp.push(...data);
+        setDatas(temp);
+        console.log(datas);
+      })
+      .catch((err) => {
+        alert(err.toString());
+      });
+  }
+
+  function addToCart(product) {}
+
   return (
     <>
       <Helmet>
         <title>Home | altafashion</title>
         <meta name="description" content="App Description" />
       </Helmet>
+
       <Layout>
         {/* Jumbotron */}
-        <div className="hero bg-white mx-4">
+        <div className="hero bg-white mt-20 mx-4">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <img src={hero} alt="hero" className="mr-36" />
             <div className="w-full h-full ml-20 mr-32">
@@ -44,31 +73,47 @@ function HomePage() {
         {/* Category */}
         <div className="flex flex-wrap w-full gap-2 mx-20">
           <ButtonPrimary
-            className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300  active:bg-primary active:text-white cursor-pointer"
+            id="btn-category"
+            className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300 active:bg-primary active:text-white cursor-pointer"
             label="All"
           />
           <ButtonPrimary
+            id="btn-category"
             className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300  active:bg-primary active:text-white cursor-pointer"
             label="Topwear"
           />
           <ButtonPrimary
+            id="btn-category"
             className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300  active:bg-primary active:text-white cursor-pointer"
             label="Footwear"
           />
           <ButtonPrimary
+            id="btn-category"
             className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300  active:bg-primary active:text-white cursor-pointer"
             label="Bottomwear"
           />
           <ButtonPrimary
+            id="btn-category"
             className="w-32 h-10 flex justify-center items-center text-base font-medium border border-gray-300  active:bg-primary active:text-white cursor-pointer"
             label="Accessories"
           />
         </div>
 
         {/* list products */}
-        <div className="mx-20">
-          <CardProduct />
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 my-9 mx-20">
+          <>
+            {datas.map((detail) => (
+              <CardProduct
+                key={detail.id}
+                image={detail.image}
+                name={detail.name}
+                price={detail.price}
+                onNavigate={() => props.navigate(`/detail/${detail.id}`)}
+              />
+            ))}
+          </>
         </div>
+
         {/* Pagination */}
         <div className="flex justify-end gap-4 mx-20 my-11 mb-32">
           {/* left */}
@@ -107,7 +152,6 @@ function HomePage() {
           </div>
         </div>
       </Layout>
-      ;
     </>
   );
 }
