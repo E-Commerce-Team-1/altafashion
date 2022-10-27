@@ -51,7 +51,7 @@ function Index() {
         />
         <Route
           path="/myproduct"
-          element={isLoggedin ? <MyProduct /> : <Navigate to="/login" />}
+          element={<MyProduct />}
         />
         <Route path="/detail/:id" element={<DetailProduct />} />
         <Route
