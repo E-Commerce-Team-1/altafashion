@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { WithRouter } from "../utils/Navigation";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import Layout from "../components/Layout";
 import Background from "../assets/background.svg";
@@ -9,6 +11,8 @@ import { InputText, InputEmail, InputPassword } from "../components/Input";
 import { apiRequest } from "../utils/apiRequest";
 
 const MyProfile = () => {
+  const navigate = useNavigate();
+  const [token, removeCookie] = useCookies();
   const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [objSubmit, setObjSubmit] = useState("");
@@ -52,6 +56,21 @@ const MyProfile = () => {
     temp[key] = value;
     setObjSubmit(temp);
   };
+
+  function deleteUser() {
+    axios
+      .delete(`https://immersiveapp.site/users`)
+      .then((res) => {
+        const { data } = res.data;
+        setDatas(data);
+        removeCookie("token");
+        alert("Account Deleted");
+        navigate("/");
+      })
+      .catch((err) => {
+        alert(err.toString());
+      });
+  }
 
   return (
     <Layout>
@@ -124,7 +143,7 @@ const MyProfile = () => {
             Save Changes
           </button>
           <button
-            // onClick={() => handleDeleteAccount()}
+            onClick={() => deleteUser()}
             className="border-[#B3B3B3] border text-secondary h-12 w-52 text-base font-medium"
           >
             Delete Account

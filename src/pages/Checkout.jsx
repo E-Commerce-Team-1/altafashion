@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { WithRouter } from "../utils/Navigation";
 
 import Layout from "../components/Layout";
@@ -100,10 +101,12 @@ const Checkout = () => {
               </p>
             </div>
           </div>
-          <Button
-            className="bg-primary mt-4 h-14 w-[500px] flex items-center justify-center font-normal text-lg text-white cursor-pointer"
-            label="Checkout Order"
-          />
+          <Link to="/history">
+            <Button
+              className="bg-primary mt-4 h-14 w-[500px] flex items-center justify-center font-normal text-lg text-white cursor-pointer"
+              label="Checkout Order"
+            />
+          </Link>
         </section>
       </div>
     </Layout>

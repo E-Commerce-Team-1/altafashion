@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { WithRouter } from "../utils/Navigation";
+import { Link } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import { setCarts } from "../utils/redux/reducers/reducer";
@@ -104,9 +105,11 @@ const CartDetail = () => {
           </p>
         </div>
         <div className="text-center">
-          <button className="bg-primary font-medium text-lg text-white w-full mt-14 h-14">
-            Buy Now
-          </button>
+          <Link to="/checkout">
+            <button className="bg-primary font-medium text-lg text-white w-full mt-14 h-14">
+              Buy Now
+            </button>
+          </Link>
         </div>
       </section>
     </Layout>
