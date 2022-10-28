@@ -6,7 +6,6 @@ import { useCookies } from "react-cookie";
 
 import Layout from "../components/Layout";
 import Background from "../assets/background.svg";
-import Profile from "../assets/profile.png";
 import { InputText, InputEmail, InputPassword } from "../components/Input";
 import { apiRequest } from "../utils/apiRequest";
 
@@ -78,7 +77,6 @@ const MyProfile = () => {
         <img className="w-screen" src={Background} alt="Background" />
         <div className="flex mx-20">
           <div className="w-44 h-44 -mt-14 rounded-full">
-            {/* <img src={Profile} alt="Profile" /> */}
             <img src={datas?.profile} alt="Profile" />
           </div>
           <div className="mt-4 ml-6">

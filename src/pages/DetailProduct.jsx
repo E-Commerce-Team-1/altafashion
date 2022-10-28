@@ -67,10 +67,6 @@ function DetailProduct(props) {
               {datas.name}
             </h1>
             <p className="text-justify text-lg text-secondary drop-shadow-md mt-9 mb-16">
-              {/* Sepatu olahraga model bamba. Tersedia dalam berbagai warna.
-                  Memiliki tujuh lubang tali. Komponen tumpang-tindih di bagian
-                  tumit dengan detail setik balik. Sol berwarna putih. Ukuran 42
-                  Hitam. */}
               {datas.description}
             </p>
             <h2 className="text-secondary text-2xl font-medium">

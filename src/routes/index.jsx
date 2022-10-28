@@ -53,17 +53,6 @@ function Index() {
       delete axios.defaults.headers.common["Authorization"];
     }
   })();
-  // useEffect(() => {
-  //   const getToken = localStorage.getItem("token");
-  //   if (getToken) {
-  //     dispatch(handleAuth(true));
-  //   } else {
-  //     dispatch(handleAuth(false));
-  //   }
-  //   axios.defaults.headers.common["Authorization"] = getToken
-  //     ? `Bearer ${getToken}`
-  //     : "";
-  // }, [isLoggedin]);
 
   useEffect(() => {
     const getProduct = localStorage.getItem("addCart");

@@ -8,7 +8,6 @@ import Button from "../components/Button";
 import { ModalAddProduct, ModalEditProduct } from "../components/ModalProduct";
 
 import { apiRequest } from "../utils/apiRequest";
-//import Image2 from "../assets/img-product2.png";
 
 const MyProduct = (props) => {
   const [datas, setDatas] = useState([]);
@@ -27,7 +26,6 @@ const MyProduct = (props) => {
         const temp = [...datas];
         temp.push(...data);
         setDatas(temp);
-        console.log(datas);
       })
       .catch((err) => {
         alert(err.toString());
@@ -65,56 +63,39 @@ const MyProduct = (props) => {
         <section className="w-ful flex mx-3 md:mx-16 lg:mx-20 xl:mx-14">
           <div className="grid grid-cols-4 gap-8">
             <>
-              {datas.map((detail) => (
-                <div className="mb-10">
-                  <img
-                    className="h-60 w-72"
-                    src={detail?.image}
-                    alt="Image Product"
-                  />
-                  <div className="mt-3 mb-4">
-                    <h5 className="font-semibold text-primary text-2xl mb-2">
-                      {detail?.name}
-                    </h5>
-                    <p className="font-medium text-xl text-secondary mb-2">
-                      Rp {detail?.price}
-                    </p>
-                    <p className="font-medium text-xl text-secondary mb-5">
-                      Stock: {detail?.qty}
-                    </p>
-                  </div>
-                  <div>
-                    <ModalEditProduct />
-                    <Button
-                      onClick={() => handleDelMyProduct(detail?.id)}
-                      className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
-                      label="Delete Product"
+              {datas.length !== 0 ? (
+                datas.map((detail) => (
+                  <div className="mb-10">
+                    <img
+                      className="h-60 w-72"
+                      src={detail?.image}
+                      alt="Image Product"
                     />
+                    <div className="mt-3 mb-4">
+                      <h5 className="font-semibold text-primary text-2xl mb-2">
+                        {detail?.name}
+                      </h5>
+                      <p className="font-medium text-xl text-secondary mb-2">
+                        Rp {detail?.price}
+                      </p>
+                      <p className="font-medium text-xl text-secondary mb-5">
+                        Stock: {detail?.qty}
+                      </p>
+                    </div>
+                    <div>
+                      <ModalEditProduct />
+                      <Button
+                        onClick={() => handleDelMyProduct(detail?.id)}
+                        className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
+                        label="Delete Product"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>You don't have any products yet.</p>
+              )}
             </>
-            {/* <div className="mb-10">
-              <img className="h-60 w-72" src={Image2} alt="Image Product" />
-              <div className="mt-3 mb-4">
-                <h5 className="font-semibold text-primary text-2xl mb-2">
-                  Striped Shirt
-                </h5>
-                <p className="font-medium text-xl text-secondary mb-2">
-                  Rp 299.000
-                </p>
-                <p className="font-medium text-xl text-secondary mb-5">
-                  Stock: 400
-                </p>
-              </div>
-              <div>
-                <ModalEditProduct />
-                <Button
-                  className="bg-white border border-[#B3B3B3] h-11 w-72 flex items-center justify-center font-normal text-base mt-2 text-secondary cursor-pointer"
-                  label="Delete Product"
-                />
-              </div>
-            </div> */}
           </div>
         </section>
       </Layout>

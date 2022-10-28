@@ -3,7 +3,6 @@ import { IoIosAdd } from "react-icons/io";
 
 import Button from "../components/Button";
 import { InputCustom } from "../components/Input";
-import Image from "../assets/img-modal.png";
 import { apiRequest } from "../utils/apiRequest";
 
 function ModalAddProduct() {
@@ -51,7 +50,6 @@ function ModalAddProduct() {
           <h3 className="font-bold text-lg text-center">Add New Product</h3>
           <hr className="text-line mt-6" />
           <div className="flex justify-center mt-6 mb-9">
-            {/* <img src={Image} alt="Image Product" /> */}
             <InputCustom
               value={objSubmit.image}
               onChange={(e) => handleChange(e.target.value, "image")}

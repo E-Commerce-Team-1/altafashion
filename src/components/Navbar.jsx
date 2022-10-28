@@ -10,7 +10,7 @@ import {
 } from "react-icons/ri";
 
 function Navbar() {
-  const [token, removeCookie] = useCookies();
+  const [removeCookie] = useCookies();
   const navigate = useNavigate();
 
   const handleLogout = () => {
