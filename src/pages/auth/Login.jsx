@@ -49,27 +49,6 @@ function Login() {
       })
       .finally(() => setLoading(false));
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`https://immersiveapp.site/login`, {
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((response) => {
-  //       setCookie("token", data.token, { path: "/" });
-  //       dispatch(handleAuth(true));
-  //       alert("You're logged in");
-  //       navigate("/home");
-  //     })
-  //     .catch((error) => {
-  //       if (error.response?.status === 400) {
-  //         alert("An invalid client request.");
-  //       } else if (error.response?.status === 500) {
-  //         alert("There is problem on server.");
-  //       }
-  //     });
-  // };
 
   return (
     <>

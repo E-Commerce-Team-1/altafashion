@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { WithRouter } from "../utils/Navigation";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 import Layout from "../components/Layout";
 import { setCarts } from "../utils/redux/reducers/reducer";
-import Product from "../assets/product_image.png";
 import Product2 from "../assets/product_image-2.png";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import CardCart from "../components/CardCart";
-import { useState } from "react";
 
 const CartDetail = (props) => {
   const carts = useSelector((state) => state.data.carts);
@@ -27,19 +24,6 @@ const CartDetail = (props) => {
     localStorage.removeItem(filtered);
     alert("It's gone");
   }
-
-  // function handleRemove() {
-  //   axios
-  //     .delete(`https://immersiveapp.site/carts/${props.params.id}`)
-  //     .then((res) => {
-  //       const { data } = res.data;
-  //       setDatas(data);
-  //       alert("Removed from cart");
-  //     })
-  //     .catch((err) => {
-  //       alert(err.toString());
-  //     });
-  // }
 
   return (
     <Layout>

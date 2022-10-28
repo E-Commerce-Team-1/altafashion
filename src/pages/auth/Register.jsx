@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 
 import { Helmet } from "react-helmet";
 import { InputText, InputEmail, InputPassword } from "../../components/Input";
@@ -48,26 +47,6 @@ function Register() {
         setLoading(false);
       });
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const body = {
-  //     fullname: fullname,
-  //     email,
-  //     password,
-  //   };
-  //   apiRequest("users", "post", body)
-  //     .then((response) => {
-  //       const { message, data } = response.data;
-  //       if (data) {
-  //         navigate("/login");
-  //       }
-  //       alert(message);
-  //     })
-  //     .catch((error) => {
-  //       const { message } = error.response.data;
-  //       alert(message);
-  //     });
-  // };
 
   return (
     <>
